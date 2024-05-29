@@ -31,6 +31,24 @@ def get_stored_animals():
         if type(db)==MongoClient:
             db.close()
 
+@app.route('/newAnimal', methods = ['POST'])
+def newAnimal():
+    db=""
+    db = get_db() #Ottengo l'istanza del DB
+    #Cerco l'id maggiore 
+    last_animal = db.animal_tb.find_one(sort=[("id", -1)])
+    #print(last_animal, flush=True) # In caso di test aggiungere Flush
+    #aggiorno l'id
+    request.json['id'] = int(last_animal['id']) + 1 
+    #inserisco la richiesta
+    x = db.animal_tb.insert_one(request.json)
+    #creo la risposta per il client
+    resp = app.response_class(
+        response= json.dumps({"id":request.json['id'], "name":request.json['id'], "type":request.json['type']}),
+        status=200,
+        mimetype='application/json'
+    )
+    return resp
 
 @app.route('/')
 def ping_server():
