@@ -12,6 +12,13 @@ export class AppComponent {
   title = 'client';
   data = new Array<Animal>()
 
+  constructor(private animalService : AnimalsService)
+  {
+    this.animalService.getAnimals().subscribe(
+      (data : VettAnimal)=>{this.data = data['animals']}
+    )
+  }
+
   form = new FormGroup({
     "name" : new FormControl(),
     "type" : new FormControl(),
@@ -25,19 +32,17 @@ export class AppComponent {
       "id" : '0',
       "name" : this.form.controls['name'].value,
       "type" : this.form.controls['type'].value,
+    };
 
-    }
-  }
-
-  constructor(private animalService : AnimalsService)
-  {
-    this.animalService.getAnimals().subscribe(
-      (data) => {
+    this.animalService.sendNewAnimal(a).subscribe(
+      (data)=>{
         console.log(data);
         a.id = data['id'];
         this.data.push(a)
       }
     )
   }
+
+
 
 }

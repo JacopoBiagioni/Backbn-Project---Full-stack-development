@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrlServer: 'https://5000-jacopobiagi-progettodoc-oqrjl3bj6bt.ws-eu114.gitpod.io'
+  baseUrlServer: 'https://5000-jacopobiagi-progettodoc-p4c80551tci.ws-eu114.gitpod.io/'
 };
 
 /*

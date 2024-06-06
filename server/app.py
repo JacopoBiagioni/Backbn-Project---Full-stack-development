@@ -12,7 +12,7 @@ def get_db():
                          port=27017, 
                          username=os.environ["MONGO_INITDB_ROOT_USERNAME"], 
                          password=os.environ["MONGO_INITDB_ROOT_PASSWORD"],
-                        authSource="admin")
+                         authSource="admin")
     db = client[os.environ["MONGO_INITDB_DATABASE"]]
     return db
 
